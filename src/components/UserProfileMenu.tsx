@@ -66,7 +66,7 @@ export const UserProfileMenu = ({ onProfileClick }: UserProfileMenuProps) => {
 
   const handleLogout = async () => {
     await signOut();
-    navigate("/login");
+    navigate("/cadastro");
   };
 
   return (

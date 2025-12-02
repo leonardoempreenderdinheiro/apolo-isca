@@ -49,11 +49,11 @@ const ControlPanel = () => {
     returnRatePeriod: "Anual",
     inflation: 3.75,
     inflationPeriod: "Anual",
-    adjustCapitalInflation: false,
-    adjustContributionsInflation: false,
-    realGrowthContributions: 0,
+    adjustCapitalInflation: true,
+    adjustContributionsInflation: true,
+    realGrowthContributions: 1,
     enableRealGrowth: true,
-    includeTax: false,
+    includeTax: true,
     taxRate: 15
   });
 
@@ -306,7 +306,7 @@ const ControlPanel = () => {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <CardTitle className="flex items-center gap-2 text-lg">
-                    PAINEL DE CONTROLE
+                    PAINEL DE CONTROLE - {profileName}
                     <Info className="h-4 w-4 text-muted-foreground" />
                   </CardTitle>
                   <Button variant="outline" size="sm">

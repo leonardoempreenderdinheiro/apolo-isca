@@ -154,8 +154,7 @@ const Login = () => {
           .insert({
             user_id: authData.user.id,
             profile_type: 'personal',
-            name: fullName,
-            relationship: 'Titular'
+            name: fullName
           });
 
         if (apoloProfileError) {
