@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,7 +11,8 @@ import apoloLogo from "@/assets/apolo-logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [isSignUp, setIsSignUp] = useState(false);
+  const location = useLocation();
+  const isSignUp = location.pathname === '/cadastro';
 
   // Login fields
   const [email, setEmail] = useState('');
@@ -192,7 +193,7 @@ const Login = () => {
           <div className="flex gap-2 mb-6 p-1 bg-muted rounded-lg">
             <button
               type="button"
-              onClick={() => setIsSignUp(false)}
+              onClick={() => navigate('/entrar')}
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${!isSignUp
                 ? 'bg-background text-foreground shadow-sm'
                 : 'text-muted-foreground hover:text-foreground'
@@ -202,7 +203,7 @@ const Login = () => {
             </button>
             <button
               type="button"
-              onClick={() => setIsSignUp(true)}
+              onClick={() => navigate('/cadastro')}
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${isSignUp
                 ? 'bg-background text-foreground shadow-sm'
                 : 'text-muted-foreground hover:text-foreground'

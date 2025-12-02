@@ -21,7 +21,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/entrar" element={<Login />} />
+          <Route path="/cadastro" element={<Login />} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/apolo/criar-perfil" element={<ProtectedRoute><ApoloCreateProfile /></ProtectedRoute>} />
           <Route path="/apolo/dashboard" element={<ProtectedRoute><ApoloDashboard /></ProtectedRoute>} />
