@@ -18,6 +18,7 @@ import {
 } from "@/hooks/useApoloCalculations";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from "recharts";
 import { UserProfileMenu } from "@/components/UserProfileMenu";
+import { getProfileIdFromCode } from "@/utils/profileCodeMapper";
 
 
 // Helper function to format currency in Brazilian format
@@ -31,7 +32,8 @@ const formatBRL = (value: number): string => {
 const ControlPanel = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const profileId = searchParams.get("profileId");
+  const code = searchParams.get("code");
+  const profileId = code ? getProfileIdFromCode(code) : null;
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [loading, setLoading] = useState(true);
   const [studyId, setStudyId] = useState<string | null>(null);

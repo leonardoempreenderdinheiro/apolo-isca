@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { ArrowLeft, User, Users, Plus, Trash2 } from "lucide-react";
 import apoloLogo from "@/assets/apolo-logo.png";
 import { UserProfileMenu } from "@/components/UserProfileMenu";
+import { getCodeForProfileId } from "@/utils/profileCodeMapper";
 
 interface ApoloProfile {
   id: string;
@@ -137,7 +138,8 @@ const ApoloDashboard = () => {
   };
 
   const handleViewPlanning = (profileId: string) => {
-    navigate(`/apolo/painel?profileId=${profileId}`);
+    const code = getCodeForProfileId(profileId);
+    navigate(`/apolo/painel?code=${code}`);
   };
 
 
