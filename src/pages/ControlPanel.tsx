@@ -40,7 +40,7 @@ const ControlPanel = () => {
   const [profileName, setProfileName] = useState("");
   const [profileAge, setProfileAge] = useState<number | null>(null);
   const [profileRelationship, setProfileRelationship] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState("perfil");
+  const [activeTab, setActiveTab] = useState("start");
   const [formData, setFormData] = useState({
     currentAge: 30,
     applicationPeriod: 25,
@@ -605,6 +605,7 @@ const ControlPanel = () => {
                           setStudyId(currentStudyId);
                         }
                         toast.success("Estudo salvo com sucesso!");
+                        setActiveTab("painel");
                       } catch (error: any) {
                         console.error("Erro ao criar estudo:", error);
                         const msg = error?.message || error?.hint || "Erro ao criar estudo";
@@ -683,7 +684,7 @@ const ControlPanel = () => {
                 if (primeiroMilhao) {
                   milestoneReached = 'R$ 1 Milhão';
                   const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-                  const monthName = monthNames[primeiroMilhao.month];
+                  const monthName = monthNames[new Date(primeiroMilhao.date).getMonth()];
                   const ano = new Date(primeiroMilhao.date).getFullYear();
                   const idade = formData.currentAge + primeiroMilhao.keyYear;
                   milestoneDate = `${monthName}/${ano}`;

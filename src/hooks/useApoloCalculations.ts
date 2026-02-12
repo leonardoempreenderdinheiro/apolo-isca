@@ -170,11 +170,7 @@ export function findFirstMillion(
 
   if (foundIndex === -1) return null;
 
-  // User requested to subtract 1 month from the calculated date
-  // "pegar o mês que está dando no calculo - 1 (mês)"
-  if (foundIndex > 0) {
-    return projections[foundIndex - 1];
-  }
+
 
   return projections[foundIndex];
 }

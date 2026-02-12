@@ -192,8 +192,11 @@ const ApoloDashboard = () => {
                 </div>
               </CardHeader>
               <CardContent>
+                <p className="text-xs text-muted-foreground text-center mb-2">
+                  Clique em comece seu estudo e faça sua projeção.
+                </p>
                 <Button className="w-full text-sm sm:text-base">
-                  {studiesMap[personalProfile.id] ? "Visualizar Estudo" : "Monte seu estudo"}
+                  Comece seu estudo
                 </Button>
               </CardContent>
             </Card>
@@ -225,8 +228,11 @@ const ApoloDashboard = () => {
                 </div>
               </CardHeader>
               <CardContent>
+                <p className="text-xs text-muted-foreground text-center mb-2">
+                  Clique em comece seu estudo e faça sua projeção.
+                </p>
                 <Button className="w-full text-sm sm:text-base" onClick={() => handleViewPlanning(dependent.id)}>
-                  {studiesMap[dependent.id] ? "Visualizar Estudo" : "Monte seu estudo"}
+                  Comece seu estudo
                 </Button>
               </CardContent>
             </Card>
