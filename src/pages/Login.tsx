@@ -8,6 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import { Eye, EyeOff } from 'lucide-react';
 import apoloLogo from "@/assets/apolo-logo.png";
+import OnboardingSurveyDialog from '@/components/OnboardingSurveyDialog';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ const Login = () => {
   const [conheceTechFinance, setConheceTechFinance] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [showSurvey, setShowSurvey] = useState(false);
+  const [newUserId, setNewUserId] = useState<string | null>(null);
 
   useEffect(() => {
     // Verificar se já está autenticado
@@ -167,9 +170,10 @@ const Login = () => {
 
       toast.success('Conta criada com sucesso!');
 
-      // Se o e-mail não precisar de confirmação, redirecionar
+      // Se o e-mail não precisar de confirmação, mostrar pesquisa
       if (authData.session) {
-        navigate('/apolo/dashboard');
+        setNewUserId(authData.user.id);
+        setShowSurvey(true);
       } else {
         toast.info('Verifique seu e-mail para confirmar o cadastro');
       }
@@ -392,6 +396,15 @@ const Login = () => {
           Ambiente de desenvolvimento
         </p>
       </div>
+
+      {/* Popup de pesquisa pós-cadastro */}
+      {showSurvey && newUserId && (
+        <OnboardingSurveyDialog
+          open={showSurvey}
+          userId={newUserId}
+          onComplete={() => navigate('/apolo/dashboard')}
+        />
+      )}
     </div>
   );
 };
