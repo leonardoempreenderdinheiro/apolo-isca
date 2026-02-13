@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,6 +13,7 @@ import OnboardingSurveyDialog from '@/components/OnboardingSurveyDialog';
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const isSignUp = location.pathname === '/cadastro';
 
   // Login fields
@@ -29,6 +30,18 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showSurvey, setShowSurvey] = useState(false);
   const [newUserId, setNewUserId] = useState<string | null>(null);
+
+  // Pré-preencher campos do cadastro a partir de query params (UTM)
+  useEffect(() => {
+    if (isSignUp) {
+      const nome = searchParams.get('nome');
+      const emailParam = searchParams.get('email');
+      const telefone = searchParams.get('telefone');
+      if (nome) setFullName(nome);
+      if (emailParam) setEmail(emailParam);
+      if (telefone) setPhone(telefone);
+    }
+  }, [isSignUp, searchParams]);
 
   useEffect(() => {
     // Verificar se já está autenticado
