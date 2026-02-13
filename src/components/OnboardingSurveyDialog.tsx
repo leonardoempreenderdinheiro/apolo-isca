@@ -9,6 +9,7 @@ import {
     DialogDescription,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
     Select,
@@ -17,7 +18,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { GraduationCap, PiggyBank, Wallet } from 'lucide-react';
+import { GraduationCap, PiggyBank, Wallet, Briefcase } from 'lucide-react';
 
 interface OnboardingSurveyDialogProps {
     open: boolean;
@@ -54,12 +55,13 @@ const RENDA_OPTIONS = [
 ];
 
 const OnboardingSurveyDialog = ({ open, userId, onComplete }: OnboardingSurveyDialogProps) => {
+    const [areaAtuacao, setAreaAtuacao] = useState('');
     const [nivelEscolaridade, setNivelEscolaridade] = useState('');
     const [faixaInvestimentos, setFaixaInvestimentos] = useState('');
     const [faixaRendaMensal, setFaixaRendaMensal] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const isFormValid = nivelEscolaridade && faixaInvestimentos && faixaRendaMensal;
+    const isFormValid = areaAtuacao.trim().length >= 2 && nivelEscolaridade && faixaInvestimentos && faixaRendaMensal;
 
     const handleSubmit = async () => {
         if (!isFormValid) {
@@ -72,6 +74,7 @@ const OnboardingSurveyDialog = ({ open, userId, onComplete }: OnboardingSurveyDi
         const { error } = await supabase
             .from('profiles')
             .update({
+                area_atuacao: areaAtuacao,
                 nivel_escolaridade: nivelEscolaridade,
                 faixa_investimentos: faixaInvestimentos,
                 faixa_renda_mensal: faixaRendaMensal,
@@ -107,6 +110,22 @@ const OnboardingSurveyDialog = ({ open, userId, onComplete }: OnboardingSurveyDi
                 </DialogHeader>
 
                 <div className="space-y-5 py-2">
+                    {/* Área de Atuação */}
+                    <div className="space-y-2">
+                        <Label className="flex items-center gap-2 text-sm font-medium">
+                            <Briefcase className="h-4 w-4 text-primary" />
+                            Qual a sua área de atuação?
+                        </Label>
+                        <Input
+                            id="areaAtuacao"
+                            type="text"
+                            placeholder="Ex: Médico, Engenheiro, Empresário..."
+                            value={areaAtuacao}
+                            onChange={(e) => setAreaAtuacao(e.target.value)}
+                            className="h-11"
+                        />
+                    </div>
+
                     {/* Nível de Escolaridade */}
                     <div className="space-y-2">
                         <Label className="flex items-center gap-2 text-sm font-medium">

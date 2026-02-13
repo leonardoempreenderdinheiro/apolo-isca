@@ -24,7 +24,7 @@ const Login = () => {
   // Sign up fields
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
-  const [areaAtuacao, setAreaAtuacao] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [conheceTechFinance, setConheceTechFinance] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -118,8 +118,8 @@ const Login = () => {
       return;
     }
 
-    if (!areaAtuacao || areaAtuacao.trim().length < 2) {
-      toast.error('Preencha a área de atuação');
+    if (password !== confirmPassword) {
+      toast.error('As senhas não coincidem');
       return;
     }
 
@@ -133,7 +133,6 @@ const Login = () => {
         data: {
           full_name: fullName,
           phone: phone,
-          area_atuacao: areaAtuacao,
           conhece_techfinance: conheceTechFinance,
         },
         emailRedirectTo: `${window.location.origin}/`,
@@ -156,7 +155,6 @@ const Login = () => {
         .from('profiles')
         .update({
           phone: phone,
-          area_atuacao: areaAtuacao,
           conhece_techfinance: conheceTechFinance,
         })
         .eq('id', authData.user.id);
@@ -366,16 +364,31 @@ const Login = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="areaAtuacao">Área de Atuação</Label>
-                <Input
-                  id="areaAtuacao"
-                  type="text"
-                  placeholder="Ex: Médico"
-                  value={areaAtuacao}
-                  onChange={(e) => setAreaAtuacao(e.target.value)}
-                  disabled={isLoading}
-                  className="h-11"
-                />
+                <Label htmlFor="confirmPassword">Confirmar Senha</Label>
+                <div className="relative">
+                  <Input
+                    id="confirmPassword"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Digite a senha novamente"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    disabled={isLoading}
+                    className="h-11 pr-10"
+                    autoComplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
+                </div>
               </div>
 
               <div className="flex items-center space-x-2 py-2">
