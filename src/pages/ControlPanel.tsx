@@ -822,7 +822,7 @@ const ControlPanel = () => {
                       </div>
 
                       {/* Passive Income Card */}
-                      <Card className="bg-gradient-to-br from-indigo-600 to-purple-600 dark:from-indigo-700 dark:to-purple-700 text-white border-0 shadow-lg">
+                      <Card className="text-white border-0 shadow-lg" style={{ background: 'linear-gradient(to bottom right, #2596be, #1e7a9e)' }}>
                         <CardContent className="py-4 sm:py-5">
                           <div className="flex items-center justify-between gap-4">
                             <div className="flex items-center gap-3 sm:gap-4">
@@ -831,7 +831,7 @@ const ControlPanel = () => {
                               </div>
                               <div>
                                 <p className="text-sm sm:text-base font-semibold">Renda Passiva Mensal {apoloData.advancedConfiguration.fixInflation ? "(corrigida pela inflação)" : "(nominal)"}</p>
-                                <p className="text-xs opacity-80 mt-0.5">Baseada na taxa real líquida de retorno</p>
+                                <p className="text-xs opacity-80 mt-0.5">Considera taxa real líquida de impostos</p>
                               </div>
                             </div>
                             <p className="text-xl sm:text-3xl font-bold flex-shrink-0">
